@@ -7,7 +7,7 @@ Extract Claude Code conversation sessions from raw `.jsonl` logs into clean, rea
 Claude Code stores every conversation as a `.jsonl` file in `~/.claude/projects/`. These files are large (1–5 MB), verbose, and full of tool metadata. This tool extracts what actually matters:
 
 - **User messages**: fully preserved, no truncation
-- **Claude's final replies**: complete text, marked as *(最终回复)*
+- **Claude's final replies**: complete text, marked as *(final reply)*
 - **Intermediate tool calls**: summarized (e.g. `[Bash: check git status]`)
 - **Session ID**: shown in full for `claude --resume <id>` restore
 
@@ -32,14 +32,14 @@ Output files are saved to `~/claude-sessions/` by default (configurable via `OUT
 
 ```markdown
 # Claude Code Session
-- **Session ID**: `a1bb5eb3-...` *(可用 `claude --resume ...` 还原)*
-- **时间**: 2026-04-19 23:00 → 2026-04-21 13:00
-- **消息数**: 306
+- **Session ID**: `a1bb5eb3-...` (resume with `claude --resume ...`)
+- **Time**: 2026-04-19 23:00 to 2026-04-21 13:00
+- **Messages**: 306
 
 **User** `10:02`
 How do I set up a daily cron job in Python?
 
-**Claude** `10:02` *(最终回复)*
+**Claude** `10:02` *(final reply)*
 You can use the `schedule` library or a system cron. Here's the simplest approach...
 ```
 
@@ -48,7 +48,7 @@ You can use the `schedule` library or a system cron. Here's the simplest approac
 The extracted Markdown is compact enough to feed directly into Claude for summarization:
 
 ```
-请总结这次对话的主要话题、决策和结论：
+Summarize the main topics, decisions and conclusions from this conversation:
 [paste extracted .md content]
 ```
 
